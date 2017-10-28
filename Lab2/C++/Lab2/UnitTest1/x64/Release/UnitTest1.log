@@ -1,0 +1,9 @@
+﻿  unittest1.cpp
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+     Creating library E:\Projects\PPD\PPD2\C++\Lab2\x64\Release\UnitTest1.lib and object E:\Projects\PPD\PPD2\C++\Lab2\x64\Release\UnitTest1.exp
+  Generating code
+  17 of 727 functions ( 2.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    11 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  UnitTest1.vcxproj -> E:\Projects\PPD\PPD2\C++\Lab2\x64\Release\UnitTest1.dll
