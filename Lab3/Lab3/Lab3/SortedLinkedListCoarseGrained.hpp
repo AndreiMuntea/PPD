@@ -1,76 +1,28 @@
 #ifndef _SORTED_LINKED_LIST_COARSE_GRAINED_HPP_
 #define _SORTED_LINKED_LIST_COARSE_GRAINED_HPP_
 
-#include <mutex>
-#include <sal.h>
+#include "DoublyLinkedList.hpp"
 
 template <class T>
-class SortedLinkedListCoarseGrained
+class SortedLinkedListCoarseGrained : public DoublyLinkedList<T>
 {
-private:
-	class Node
-	{
-	public:
-		Node* next = nullptr;
-		T value;
-
-		Node(
-			_In_ const T& Value
-		);
-
-		~Node() = default;
-	};
-
 public:
 	SortedLinkedListCoarseGrained() = default;
 
-	~SortedLinkedListCoarseGrained();
+	virtual 
+	~SortedLinkedListCoarseGrained() = default;
 
-	SortedLinkedListCoarseGrained(
-		_In_ const SortedLinkedListCoarseGrained<T>& Other
-	) = delete;
-
-	void 
+	virtual
+	void
 	Insert(
-		_In_ const T& Element
-	);
+		_In_ _Const_ const T& Element
+	) override;
 
-	void 
+	virtual
+	void
 	Delete(
-		_In_ const T& Element
-	);
-
-	class Iterator
-	{
-		friend class SortedLinkedListCoarseGrained<T>;
-	public:
-		Iterator(
-			_In_ SortedLinkedListCoarseGrained<T>* Parent
-		);
-
-		~Iterator();
-
-		bool
-		IsValid();
-
-		T
-		GetNext();
-
-	private:
-		SortedLinkedListCoarseGrained<T>* parent;
-		Node* current;
-	};
-
-	Iterator 
-	GetIterator()
-	{
-		return Iterator{ this };
-	}
-
-private:
-
-	Node* head = nullptr;
-	std::mutex guard;
+		_In_ _Const_ const T& Element
+	) override;
 };
 
 
@@ -78,144 +30,59 @@ private:
 
 template<class T>
 inline 
-SortedLinkedListCoarseGrained<T>::~SortedLinkedListCoarseGrained()
-{
-	guard.lock();
-	Node* temp = nullptr;
-
-	while (this->head != nullptr)
-	{
-		temp = this->head->next;
-		delete(this->head);
-		this->head = temp;
-	}
-
-	this->head = nullptr;
-	guard.unlock();
-}
-
-template<class T>
-inline 
 void 
 SortedLinkedListCoarseGrained<T>::Insert(
-	_In_ const T & Element
+	_In_ _Const_ const T & Element
 )
 {
-	guard.lock();
+	this->AcquireExclusiveLock();
+
+	Node* previous = this->Head;
+	Node* current = this->Head->Next;
 	Node* node = new Node(Element);
-	Node* previous = this->head;
-	Node* current = this->head;
 
-	// Empty list
-	if (this->head == nullptr)
-	{
-		this->head = node;
-		goto Exit;
-	}
-
-	// We need to insert at head
-	if (Element <= this->head->value)
-	{
-		node->next = this->head;
-		this->head = node;
-		goto Exit;
-	}
-
-	// We need to insert somewhere on the list
-	while (current != nullptr && Element > current->value)
+	while (current != this->Tail && Element > current->Value)
 	{
 		previous = current;
-		current = current->next;
+		current = current->Next;
 	}
 
-	node->next = previous->next;
-	previous->next = node;
+	previous->Next = node;
+	current->Previous = node;
+	node->Next = current;
+	node->Previous = previous;
 
-Exit:
-	guard.unlock();
+	this->ReleaseExclusiveLock();
 }
 
 template<class T>
 inline 
 void 
 SortedLinkedListCoarseGrained<T>::Delete(
-	_In_ const T & Element
+	_In_ _Const_ const T & Element
 )
 {
-	guard.lock();
-	Node* previous = this->head;
-	Node* current = this->head;
+	this->AcquireExclusiveLock();
 
-	// Empty list
-	if (this->head == nullptr)
-	{
-		goto Exit;
-	}
+	Node* previous = this->Head;
+	Node* current = this->Head->Next;
 
-	// We need to delete head
-	if (this->head->value == Element)
-	{
-		current = this->head->next;
-		delete this->head;
-		this->head = current;
-		goto Exit;
-	}
-
-	// Search for the element
-	while (current != nullptr && current->value != Element)
+	while (current != this->Tail && Element > current->Value)
 	{
 		previous = current;
-		current = current->next;
+		current = current->Next;
 	}
 
-	// We didn't find the element
-	if (current == nullptr)
+	// Element wasn't found in the list
+	if (current == this->Tail || Element != current->Value)
 	{
 		goto Exit;
 	}
 
-	previous->next = current->next;
+	previous->Next = current->Next;
+	current->Next->Previous = previous;
 	delete current;
 
 Exit:
-	guard.unlock();
-}
-
-template<class T>
-inline
-SortedLinkedListCoarseGrained<T>::Node::Node(
-	_In_ const T & Value
-) :
-	next{ nullptr },
-	value{ Value }
-{}
-
-template<class T>
-inline SortedLinkedListCoarseGrained<T>::Iterator::Iterator(
-	_In_ SortedLinkedListCoarseGrained<T>* Parent
-)
-{
-	Parent->guard.lock();
-	this->parent = Parent;
-	this->current = this->parent->head;
-}
-
-template<class T>
-inline SortedLinkedListCoarseGrained<T>::Iterator::~Iterator()
-{
-	parent->guard.unlock();
-}
-
-template<class T>
-inline bool SortedLinkedListCoarseGrained<T>::Iterator::IsValid()
-{
-	return (current != nullptr);
-}
-
-template<class T>
-inline T SortedLinkedListCoarseGrained<T>::Iterator::GetNext()
-{
-	T value = current->value;
-	current = current->next;
-	return value;
-}
+	this->ReleaseExclusiveLock();
+}_

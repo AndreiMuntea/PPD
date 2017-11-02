@@ -1,86 +1,110 @@
 #ifndef _SORTED_LINKED_LIST_FINE_GRAINED_HPP_
 #define _SORTED_LINKED_LIST_FINE_GRAINED_HPP_
 
-#include <mutex>
-#include <sal.h>
+#include "DoublyLinkedList.hpp"
 
 template <class T>
-class SorteLinkedListFineGrained
+class SorteLinkedListFineGrained : public DoublyLinkedList<T>
 {
 private:
-	class Node
-	{
-	public:
-		Node* next = nullptr;
-		T value;
-		std::mutex guard;
-
-		Node(
-			_In_ const T& Value
-		);
-
-		~Node() = default;
-	};
-
 public:
-	SortedLinkedListCoarseGrained() = default;
+	SorteLinkedListFineGrained() = default;
 
-	~SortedLinkedListCoarseGrained();
+	virtual
+	~SorteLinkedListFineGrained() = default;
 
-	SortedLinkedListCoarseGrained(
-		_In_ const SortedLinkedListCoarseGrained<T>& Other
-	) = delete;
-
+	virtual
 	void
 	Insert(
-		_In_ const T& Element
-	);
+		_In_ _Const_ const T& Element
+	) override;
 
+	virtual
 	void
 	Delete(
-		_In_ const T& Element
-	);
-
-	class Iterator
-	{
-		friend class SortedLinkedListCoarseGrained<T>;
-	public:
-		Iterator(
-			_In_ SortedLinkedListCoarseGrained<T>* Parent
-		);
-
-		~Iterator();
-
-		bool
-		IsValid();
-
-		T
-		GetNext();
-
-	private:
-		SortedLinkedListCoarseGrained<T>* parent;
-		Node* current;
-	};
-
-	Iterator
-		GetIterator()
-	{
-		return Iterator{ this };
-	}
-
-private:
-
-	Node* head = nullptr;
+		_In_ _Const_ const T& Element
+	) override;
 };
 
 #endif //_SORTED_LINKED_LIST_FINE_GRAINED_HPP_
 
 template<class T>
-inline
-SorteLinkedListFineGrained<T>::Node::Node(
-	_In_ const T & Value
-) :
-	next{ nullptr },
-	value{ Value },
-	guard{}
-{}
+inline 
+void 
+SorteLinkedListFineGrained<T>::Insert(
+	_In_ _Const_ const T & Element
+)
+{
+	this->AcquireSharedLock();
+	
+	// We are sure that there are at least 2 nodes (head and tail)
+	this->Head->Lock();
+	this->Head->Next->Lock();
+
+	Node* previous = this->Head;
+	Node* current = this->Head->Next;
+	Node* node = new Node(Element);
+
+	while (current != this->Tail && Element > current->Value)
+	{
+		current->Next->Lock();
+		previous->Unlock();
+		
+		previous = current;
+		current = current->Next;
+	}
+
+	previous->Next = node;
+	current->Previous = node;
+	node->Next = current;
+	node->Previous = previous;
+
+	previous->Unlock();
+	current->Unlock();
+	this->ReleaseSharedLock();
+}
+
+template<class T>
+inline 
+void 
+SorteLinkedListFineGrained<T>::Delete(
+	_In_ _Const_ const T & Element
+)
+{
+	this->AcquireSharedLock();
+
+	// We are sure that there are at least 2 nodes (head and tail)
+	this->Head->Lock();
+	this->Head->Next->Lock();
+
+	Node* previous = this->Head;
+	Node* current = this->Head->Next;
+
+	while (current != this->Tail && Element > current->Value)
+	{
+		current->Next->Lock();
+		previous->Unlock();
+
+		previous = current;
+		current = current->Next;
+	}
+
+	// Element wasn't found in the list
+	if (current == this->Tail || Element != current->Value)
+	{
+		goto Exit;
+	}
+
+	current->Next->Lock();
+	previous->Next = current->Next;
+	current->Next->Previous = previous;
+	
+	current->Unlock();
+	delete current;
+	current = previous->Next;
+
+Exit:
+	previous->Unlock();
+	current->Unlock();
+	this->ReleaseSharedLock();
+}

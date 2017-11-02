@@ -1,7 +1,7 @@
 // Lab3.cpp : Defines the entry point for the console application.
 //
 
-#include "SortedLinkedListCoarseGrained.hpp"
+#include "SortedLinkedListFineGrained.hpp"
 #include <iostream>
 
 #define _CRTDBG_MAP_ALLOC  
@@ -9,7 +9,7 @@
 #include <crtdbg.h>  
 
 void Print(
-	_In_ SortedLinkedListCoarseGrained<int>& List
+	_In_ SorteLinkedListFineGrained<int>& List
 )
 {
 	auto iterator = List.GetIterator();
@@ -25,7 +25,7 @@ void Print(
 int main()
 {
 	{
-		SortedLinkedListCoarseGrained<int> l;
+		SorteLinkedListFineGrained<int> l;
 
 		Print(l);
 
