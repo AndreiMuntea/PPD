@@ -100,7 +100,6 @@ protected:
 	std::shared_mutex Guard;
 };
 
-#endif //_DOUBLY_LINKED_LIST_HPP_
 
 template<class T>
 inline DoublyLinkedList<T>::~DoublyLinkedList()
@@ -163,12 +162,16 @@ inline DoublyLinkedList<T>::Iterator::Iterator(DoublyLinkedList<T>* Parent)
 template<class T>
 inline DoublyLinkedList<T>::Iterator::~Iterator()
 {
-	this->Parent->ReleaseExclusiveLock();
 }
 
 template<class T>
 inline bool DoublyLinkedList<T>::Iterator::IsValid()
 {
+	if (Current == Parent->Tail)
+	{
+		this->Parent->ReleaseExclusiveLock();
+	}
+
 	return (Current != Parent->Tail);
 }
 
@@ -192,8 +195,6 @@ inline DoublyLinkedList<T>::Node::Node(const T & Value) :
 template<class T>
 inline DoublyLinkedList<T>::Node::~Node()
 {
-	this->Lock();
-	this->Unlock();
 }
 
 template<class T>
@@ -207,3 +208,6 @@ inline void DoublyLinkedList<T>::Node::Unlock()
 {
 	this->Guard.unlock();
 }
+
+
+#endif //_DOUBLY_LINKED_LIST_HPP_

@@ -1,0 +1,5 @@
+﻿  unittest1.cpp
+e:\projects\ppd\ppd\lab3\lab3\unittest1\unittest1.cpp(47): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\time.h(475): note: see declaration of 'ctime'
+  UnitTest1.vcxproj -> E:\Projects\PPD\PPD\Lab3\Lab3\Debug\UnitTest1.dll
+  UnitTest1.vcxproj -> E:\Projects\PPD\PPD\Lab3\Lab3\Debug\UnitTest1.pdb (Partial PDB)

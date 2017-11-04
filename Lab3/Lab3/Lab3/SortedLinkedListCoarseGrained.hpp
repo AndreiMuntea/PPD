@@ -26,8 +26,6 @@ public:
 };
 
 
-#endif //_SORTED_LINKED_LIST_COARSE_GRAINED_HPP_
-
 template<class T>
 inline 
 void 
@@ -85,4 +83,6 @@ SortedLinkedListCoarseGrained<T>::Delete(
 
 Exit:
 	this->ReleaseExclusiveLock();
-}_
+}
+
+#endif //_SORTED_LINKED_LIST_COARSE_GRAINED_HPP_

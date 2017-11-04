@@ -26,8 +26,6 @@ public:
 	) override;
 };
 
-#endif //_SORTED_LINKED_LIST_FINE_GRAINED_HPP_
-
 template<class T>
 inline 
 void 
@@ -108,3 +106,5 @@ Exit:
 	current->Unlock();
 	this->ReleaseSharedLock();
 }
+
+#endif //_SORTED_LINKED_LIST_FINE_GRAINED_HPP_
