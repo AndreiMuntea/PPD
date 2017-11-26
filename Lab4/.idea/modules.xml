@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client.iml" filepath="$PROJECT_DIR$/.idea/modules/Client.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/Client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/Client_main.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/Client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/Client_test.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Domain.iml" filepath="$PROJECT_DIR$/.idea/modules/Domain.iml" group="Domain" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Domain/Domain_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Domain/Domain_main.iml" group="Domain" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Domain/Domain_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Domain/Domain_test.iml" group="Domain" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab4.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab4_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab4_main.iml" group="Lab4" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab4_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab4_test.iml" group="Lab4" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server_main.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server_test.iml" group="Server" />
+    </modules>
+  </component>
+</project>

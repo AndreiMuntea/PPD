@@ -1,0 +1,4 @@
+1,Milk,liters,15.2,100
+2,Cheese,kilos,9.9,76
+3,Coffee,grams,10.5,11
+4,Watermelon,kilos,95.15,1000
