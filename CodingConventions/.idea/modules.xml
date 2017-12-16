@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CodingConventions.iml" filepath="$PROJECT_DIR$/.idea/modules/CodingConventions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CodingConventions_main.iml" filepath="$PROJECT_DIR$/.idea/modules/CodingConventions_main.iml" group="CodingConventions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CodingConventions_test.iml" filepath="$PROJECT_DIR$/.idea/modules/CodingConventions_test.iml" group="CodingConventions" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,82 @@
+[ STARTED CHECKING -  2017/11/27 12:21:32 ]
+
+[INFO] Last Sold - 0.0
+[INFO] Current Sold - 0.0
+[INFO] Bills Total - 0.0
+[INFO] BILLS:
+
+
+[ FINISHED CHECKING -  2017/11/27 12:21:32 ]
+
+[ STARTED CHECKING -  2017/11/27 12:21:37 ]
+
+[INFO] Last Sold - 0.0
+[INFO] Current Sold - 0.0
+[INFO] Bills Total - 0.0
+[INFO] BILLS:
+
+
+[ FINISHED CHECKING -  2017/11/27 12:21:37 ]
+
+[ STARTED CHECKING -  2017/11/27 12:21:42 ]
+
+[INFO] Last Sold - 0.0
+[INFO] Current Sold - 116.3
+[INFO] Bills Total - 116.3
+[INFO] BILLS:
+
+[2017/11/27 12:21:39] Client name: DummyClient bought 6 x 1 ( 91.19999999999999)
+[2017/11/27 12:21:40] Client name: DummyClient bought 1 x 1 ( 15.2)
+[2017/11/27 12:21:42] Client name: DummyClient bought 1 x 2 ( 9.9)
+
+[ FINISHED CHECKING -  2017/11/27 12:21:42 ]
+
+[ STARTED CHECKING -  2017/11/27 12:21:47 ]
+
+[INFO] Last Sold - 116.3
+[INFO] Current Sold - 157.70000000000002
+[INFO] Bills Total - 41.4
+[INFO] BILLS:
+
+[2017/11/27 12:21:45] Client name: DummyClient bought 3 x 3 ( 31.5)
+[2017/11/27 12:21:47] Client name: DummyClient bought 1 x 2 ( 9.9)
+
+[ FINISHED CHECKING -  2017/11/27 12:21:47 ]
+
+[ STARTED CHECKING -  2017/11/27 12:21:52 ]
+
+[INFO] Last Sold - 157.70000000000002
+[INFO] Current Sold - 259.70000000000005
+[INFO] Bills Total - 102.0
+[INFO] BILLS:
+
+[2017/11/27 12:21:50] Client name: DummyClient bought 5 x 2 ( 49.5)
+[2017/11/27 12:21:51] Client name: DummyClient bought 5 x 3 ( 52.5)
+
+[ FINISHED CHECKING -  2017/11/27 12:21:52 ]
+
+[ STARTED CHECKING -  2017/11/27 12:21:57 ]
+
+[INFO] Last Sold - 259.70000000000005
+[INFO] Current Sold - 518.1
+[INFO] Bills Total - 258.4
+[INFO] BILLS:
+
+[2017/11/27 12:21:53] Client name: DummyClient bought 5 x 1 ( 76.0)
+[2017/11/27 12:21:54] Client name: DummyClient bought 2 x 1 ( 30.4)
+[2017/11/27 12:21:57] Client name: ana bought 10 x 1 ( 152.0)
+
+[ FINISHED CHECKING -  2017/11/27 12:21:57 ]
+
+[ STARTED CHECKING -  2017/11/27 12:22:02 ]
+
+[INFO] Last Sold - 518.1
+[INFO] Current Sold - 543.2
+[INFO] Bills Total - 25.1
+[INFO] BILLS:
+
+[2017/11/27 12:21:59] Client name: DummyClient bought 1 x 2 ( 9.9)
+[2017/11/27 12:22:00] Client name: DummyClient bought 1 x 1 ( 15.2)
+
+[ FINISHED CHECKING -  2017/11/27 12:22:02 ]
+
